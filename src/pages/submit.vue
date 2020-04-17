@@ -1,21 +1,20 @@
 <template>
   <main class="container p-16">
-    <no-ssr>
+    <client-only>
       <file-pond />
-    </no-ssr>
+    </client-only>
     <output>{{ uploadState }}</output>
   </main>
 </template>
 
 <script>
+import { BSON } from 'mongodb-stitch-browser-sdk'
 import { AwsRequest } from 'mongodb-stitch-browser-services-aws'
-import { vueFilePond } from 'vue-filepond'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import { putObject, readFile } from '@/util/s3'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
+import vueFilePond, { setOptions } from 'vue-filepond'
+import { putObject } from '@/util/s3'
 import 'filepond/dist/filepond.min.css'
 
-const FilePond = vueFilePond(FilePondPluginImagePreview)
+const FilePond = vueFilePond()
 
 const UPLOAD_STATES = {
   initial: '',
@@ -43,45 +42,58 @@ export default {
       uploadState: UPLOAD_STATES.initial,
     }
   },
-  methods: {
-    onFileUpload(file) {
-      convertBytesToMegabytes(file.size) > MAX_FILE_SIZE
-        ? (this.uploadState = UPLOAD_STATES.fileTooLarge)
-        : this.s3Upload(file)
-    },
+  mounted() {
+    setOptions({
+      server: {
+        // haven't had time to refactor this code yet, and frankly don't want to, it
+        // worringly seems very delicate
+        process: (fieldName, file, metadata, load, error, progress, abort) => {
+          if (convertBytesToMegabytes(file.size) > MAX_FILE_SIZE) {
+            error(UPLOAD_STATES.fileTooLarge)
+          }
 
-    async s3Upload(file) {
-      this.uploadState = UPLOAD_STATES.reading
+          const reader = new FileReader()
 
-      const fileData = await readFile(file)
+          reader.onload = (e) => {
+            const fileData = new Uint8Array(reader.result)
+            const fileBson = new BSON.Binary(fileData)
 
-      this.uploadState = UPLOAD_STATES.uploading
+            const putObjectArgs = {
+              Body: fileBson,
+              Key: `${this.token}-${file.name}`,
+              ContentType: file.type,
+              ...putObject,
+            }
 
-      const putObjectArgs = {
-        Body: fileData,
-        Key: `${this.token}-${file.name}`,
-        ContentType: file.type,
-        ...putObject,
-      }
+            const request = new AwsRequest.Builder()
+              .withService('s3')
+              .withAction('PutObject')
+              .withRegion('us-east-1')
+              .withArgs(putObjectArgs)
 
-      const request = new AwsRequest.Builder()
-        .withService('s3')
-        .withAction('PutObject')
-        .withRegion('us-east-1')
-        .withArgs(putObjectArgs)
+            this.$s3client
+              .execute(request.build())
+              .then((result) => {
+                console.log(result.ETag)
+                load(putObjectArgs.Key)
+              })
+              .catch((err) => {
+                console.error(err)
+              })
+          }
 
-      this.$s3client
-        .execute(request.build())
-        .then((result) => {
-          console.log(result.ETag)
-          this.uploadState = UPLOAD_STATES.uploaded
-        })
-        .catch((err) => {
-          console.error(err)
-          this.uploadState = UPLOAD_STATES.uploadError
-        })
-    },
-    middleware: ['token'],
+          reader.readAsArrayBuffer(file)
+
+          // cancel methods for FilePond
+          return {
+            abort: () => {
+              abort()
+            },
+          }
+        },
+      },
+    })
   },
+  middleware: ['token'],
 }
 </script>
