@@ -1,6 +1,10 @@
 // loads the mongodb stitch client
 
-import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk'
+import {
+  Stitch,
+  AnonymousCredential,
+  RemoteMongoClient,
+} from 'mongodb-stitch-browser-sdk'
 import { AwsServiceClient } from 'mongodb-stitch-browser-services-aws'
 
 export default async ({ app }, inject) => {
@@ -14,6 +18,10 @@ export default async ({ app }, inject) => {
     new AnonymousCredential()
   )
 
+  const stitchDb = stitchApp
+    .getServiceClient(RemoteMongoClient.factory, 'atlas-cluster0')
+    .db('workdrop')
+
   const s3client = stitchApp.getServiceClient(
     AwsServiceClient.factory,
     's3-submissions'
@@ -21,5 +29,6 @@ export default async ({ app }, inject) => {
 
   inject('stitchApp', stitchApp)
   inject('stitchUser', stitchUser)
+  inject('stitchDb', stitchDb)
   inject('s3client', s3client)
 }

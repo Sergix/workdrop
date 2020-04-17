@@ -25,7 +25,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/tthoves.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -49,6 +49,7 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '@nuxtjs/svg',
   ],
   tailwindcss: {
     configPath: '@@/tailwind.config.js',

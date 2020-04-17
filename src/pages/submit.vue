@@ -4,6 +4,15 @@
       <file-pond />
     </client-only>
     <output>{{ uploadState }}</output>
+    <Button action="secondary" @click="$refs.successToast.open()"
+      >SUBMIT</Button
+    >
+    <toast
+      ref="successToast"
+      text-color="info-accessible"
+      background-color="success"
+      icon="success"
+    />
   </main>
 </template>
 
@@ -12,6 +21,8 @@ import { BSON } from 'mongodb-stitch-browser-sdk'
 import { AwsRequest } from 'mongodb-stitch-browser-services-aws'
 import vueFilePond, { setOptions } from 'vue-filepond'
 import { putObject } from '@/util/s3'
+import Toast from '@/components/base/toast'
+import Button from '@/components/base/button'
 import 'filepond/dist/filepond.min.css'
 
 const FilePond = vueFilePond()
@@ -35,6 +46,8 @@ export default {
   name: 'SubmitPage',
   components: {
     FilePond,
+    Toast,
+    Button,
   },
   data() {
     return {
@@ -74,7 +87,6 @@ export default {
             this.$s3client
               .execute(request.build())
               .then((result) => {
-                console.log(result.ETag)
                 load(putObjectArgs.Key)
               })
               .catch((err) => {
