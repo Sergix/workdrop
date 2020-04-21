@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen min-w-full">
     <Navbar class="max-w-6xl mx-auto" />
-    <nuxt class="my-10 mx-auto flex-1" />
+    <nuxt class="my-10 md:mb-32 mx-auto flex-1" />
     <Footer />
   </div>
 </template>

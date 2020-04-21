@@ -7,9 +7,9 @@
         class="w-40 max-w-40"
       />
       <ul class="mt-8">
-        <li>About</li>
-        <li>Privacy Policy</li>
-        <li>Terms of Use</li>
+        <li><nuxt-link to="/about">About</nuxt-link></li>
+        <li><nuxt-link to="/privacy">Privacy Policy</nuxt-link></li>
+        <li><nuxt-link to="/terms">Terms of Use</nuxt-link></li>
       </ul>
     </div>
   </footer>
