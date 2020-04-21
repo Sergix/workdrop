@@ -31,6 +31,9 @@ module.exports = {
       fontFamily: {
         sans: 'TT Hoves, Helvetica, Arial, sans-serif',
       },
+      fontSize: {
+        'large-screens': '20px',
+      },
       boxShadow: {
         soft: '0px 4px 12px rgba(0, 0, 0, 0.15)',
       },

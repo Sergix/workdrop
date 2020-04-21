@@ -1,28 +1,21 @@
 <template>
   <main class="flex items-center max-w-2xl">
-    <fade-transition>
+    <transition :name="transition" mode="out-in">
       <component
         :is="currentFormSection"
         class="my-auto"
         @continue="nextStep"
         @back="previousStep"
       ></component>
-    </fade-transition>
+    </transition>
 
-    <toast
-      ref="errorToast"
-      text-color="background"
-      background-color="error"
-      title="Uh oh!"
-      icon="error"
-    >
+    <toast ref="errorToast" title="Uh oh!" icon="error">
       We couldn't create the assignment. Refresh and try again.
     </toast>
   </main>
 </template>
 
 <script>
-import { FadeTransition } from 'vue2-transitions'
 import RequestFormAssignmentName from '@/components/form/RequestFormAssignmentName'
 import RequestFormStudents from '@/components/form/RequestFormStudents'
 import RequestFormMessage from '@/components/form/RequestFormMessage'
@@ -39,7 +32,6 @@ const FORM_STEPS = [
 export default {
   name: 'RequestPage',
   components: {
-    FadeTransition,
     RequestFormAssignmentName,
     RequestFormStudents,
     RequestFormMessage,
@@ -49,6 +41,7 @@ export default {
   data() {
     return {
       currentStep: 0,
+      transition: 'slide-left',
     }
   },
   computed: {
@@ -58,6 +51,7 @@ export default {
   },
   methods: {
     nextStep() {
+      this.transition = 'slide-left'
       // submit form once it reaches the end of the form
       if (this.currentStep === FORM_STEPS.length - 1) {
         this.submitRequest()
@@ -66,6 +60,7 @@ export default {
       }
     },
     previousStep() {
+      this.transition = 'slide-right'
       if (this.currentStep !== 0) {
         this.currentStep--
       }

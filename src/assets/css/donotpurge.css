@@ -1,0 +1,62 @@
+/* navbar link styling */
+.navlist > a.nuxt-link-exact-active::after {
+  content: '';
+  height: 2px;
+  transition: width 0.2s;
+  @apply mx-auto;
+  @apply block;
+  @apply w-full;
+  @apply bg-warning;
+}
+.navlist > .nuxt-link-exact-active:hover::after {
+  @apply w-1/2;
+}
+
+/* thick underline */
+.underlined {
+  @apply underline;
+  text-decoration-color: #ffd10f;
+  text-decoration-thickness: 2px;
+}
+
+/* transitions */
+.slide-left-enter-active {
+  transition: all 0.4s;
+}
+
+.slide-left-enter {
+  opacity: 0;
+  margin-left: 90px;
+}
+
+.slide-left-leave-active {
+  transition: all 0.4s;
+  opacity: 0;
+  margin-left: -100px;
+}
+
+.slide-right-enter-active {
+  transition: all 0.4s;
+}
+
+.slide-right-enter {
+  opacity: 0;
+  margin-right: 90px;
+}
+
+.slide-right-leave-active {
+  transition: all 0.4s;
+  opacity: 0;
+  margin-right: -100px;
+}
+
+@media (min-width: 768px) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.3s;
+  }
+  .page-enter,
+  .page-leave-to {
+    opacity: 0;
+  }
+}

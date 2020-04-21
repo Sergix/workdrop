@@ -3,8 +3,7 @@
     class="flex flex-row pt-5 pb-6 pl-6 pr-4 rounded-lg w-toast invisible z-10 fixed left-0 right-0 mx-auto toast"
     :class="{
       active,
-      [backgroundColorClass]: backgroundColorClass,
-      [textColorClass]: textColorClass,
+      [type]: type,
     }"
   >
     <div class="mr-4">
@@ -25,13 +24,9 @@ export default {
       type: String,
       default: 'Notification',
     },
-    backgroundColor: {
+    type: {
       type: String,
-      default: 'background',
-    },
-    textColor: {
-      type: String,
-      default: 'foreground',
+      default: 'error',
     },
     icon: {
       type: String,
@@ -63,70 +58,62 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$fadein-height: 1.5rem;
-$fadeout-height: 2rem;
+<style lang="sass" scoped>
+$fadein-height: 1.5rem
+$fadeout-height: 2rem
 
-.toast {
-  bottom: $fadein-height;
+.toast
+  bottom: $fadein-height
 
-  img {
-    width: 4rem;
-  }
-  &.active {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s stay 3s 1s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, stay 3s 1s, fadeout 0.5s 4.5s;
-  }
-}
+  img
+    width: 4rem
 
-@-webkit-keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: $fadein-height;
-    opacity: 1;
-  }
-}
+  &.active
+    visibility: visible
+    -webkit-animation: fadein 0.5s stay 3s 1s, fadeout 0.5s 2.5s
+    animation: fadein 0.5s, stay 3s 1s, fadeout 0.5s 4.5s
 
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-  to {
-    bottom: $fadein-height;
-    opacity: 1;
-  }
-}
+  &.error
+    @apply bg-error-accessible
+    @apply text-background
 
-@-webkit-keyframes stay {
-}
+@-webkit-keyframes fadein
+  from
+    bottom: 0
+    opacity: 0
 
-@keyframes stay {
-}
+  to
+    bottom: $fadein-height
+    opacity: 1
 
-@-webkit-keyframes fadeout {
-  from {
-    bottom: $fadein-height;
-    opacity: 1;
-  }
-  to {
-    bottom: $fadeout-height;
-    opacity: 0;
-  }
-}
+@keyframes fadein
+  from
+    bottom: 0
+    opacity: 0
 
-@keyframes fadeout {
-  from {
-    bottom: $fadein-height;
-    opacity: 1;
-  }
-  to {
-    bottom: $fadeout-height;
-    opacity: 0;
-  }
-}
+  to
+    bottom: $fadein-height
+    opacity: 1
+
+@-webkit-keyframes stay
+
+@keyframes stay
+
+@-webkit-keyframes fadeout
+  from
+    bottom: $fadein-height
+    opacity: 1
+
+  to
+    bottom: $fadeout-height
+    opacity: 0
+
+@keyframes fadeout
+  from
+    bottom: $fadein-height
+    opacity: 1
+
+  to
+    bottom: $fadeout-height
+    opacity: 0
 </style>

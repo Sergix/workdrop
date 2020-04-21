@@ -41,13 +41,7 @@ to request your assignment!"
     <Button type="primary" class="mt-8 md:ml-auto" @click="validateEmail">
       SEND ASSIGNMENT
     </Button>
-    <toast
-      ref="errorNotification"
-      title="Invalid Email"
-      background-color="error-accessible"
-      text-color="background"
-      icon="error"
-    >
+    <toast ref="errorNotification" title="Invalid Email" icon="error">
       Please double-check that your email is correct.
     </toast>
   </Form>

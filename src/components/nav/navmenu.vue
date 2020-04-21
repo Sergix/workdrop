@@ -20,17 +20,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.navlinks > a {
-  @apply font-bold;
-  @apply text-6xl;
-  @apply text-action;
-  @apply mt-8;
-  @apply border-b-4;
-  @apply border-warning;
-  align-self: flex-end;
-  -webkit-text-fill-color: white;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: #1c3ffd;
-}
+<style lang="sass" scoped>
+.navlinks > a
+  @apply font-bold
+  @apply text-6xl
+  @apply text-action
+  @apply mt-8
+  @apply border-b-4
+  @apply border-warning
+  align-self: flex-end
+  -webkit-text-fill-color: white
+  -webkit-text-stroke-width: 2px
+  -webkit-text-stroke-color: #1c3ffd
 </style>

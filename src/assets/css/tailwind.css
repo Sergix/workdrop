@@ -1,11 +1,7 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
+@import 'filepond/dist/filepond.min.css';
+@import '~/assets/css/donotpurge.css';
 @import 'tailwindcss/components';
 /* purgecss end ignore */
 @import 'tailwindcss/utilities';
-
-.underlined {
-  @apply underline;
-  text-decoration-color: #ffd10f;
-  text-decoration-thickness: 2px;
-}

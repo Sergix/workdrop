@@ -19,13 +19,7 @@
     <Button type="small" class="ml-auto mt-2 mb-4" @click="addStudent">
       ADD ANOTHER
     </Button>
-    <toast
-      ref="errorNotification"
-      title="Invalid Email"
-      background-color="error-accessible"
-      text-color="background"
-      icon="error"
-    >
+    <toast ref="errorNotification" title="Invalid Email" icon="error">
       Please double-check that all emails are correct.
     </toast>
   </Form>
