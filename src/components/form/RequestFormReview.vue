@@ -34,11 +34,11 @@ to request your assignment!"
       </p>
       <EmailInput
         v-model="email"
-        class="w-full"
+        class="max-w-sm"
         @validate="validated = $event"
       />
     </section>
-    <Button type="primary" class="mt-8" @click="validateEmail">
+    <Button type="primary" class="mt-8 md:ml-auto" @click="validateEmail">
       SEND ASSIGNMENT
     </Button>
     <toast

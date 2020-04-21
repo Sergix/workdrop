@@ -1,5 +1,5 @@
 <template>
-  <form class="flex flex-col px-8" @submit.prevent>
+  <form class="flex flex-col px-8" @submit.prevent="$emit('continue')">
     <h2 class="text-3xl mb-2 leading-none">{{ title }}</h2>
     <p class="text-sm italic mb-4">{{ description }}</p>
     <slot />

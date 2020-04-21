@@ -1,5 +1,5 @@
 <template>
-  <main class="px-8">
+  <main class="px-8 max-w-2xl">
     <h1 class="text-4xl mb-2 leading-none font-semibold">
       Your assignment has been submitted!
     </h1>

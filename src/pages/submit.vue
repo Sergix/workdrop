@@ -1,17 +1,17 @@
 <template>
-  <main class="container px-8">
+  <main class="container px-8 max-w-2xl">
     <div v-show="submitting">
-      <h1 class="text-3xl mb-2 leading-none">Submit your assignment</h1>
-      <section>
+      <h1 class="text-3xl leading-none">Submit your assignment</h1>
+      <section class="mt-4">
         <h2 class="text-xl font-medium">Assignment Name</h2>
         <p class="ml-4">{{ assignmentName }}</p>
       </section>
-      <section>
+      <section class="mt-2">
         <h2 class="text-xl font-medium">Message</h2>
         <p class="ml-4">{{ message }}</p>
       </section>
       <client-only>
-        <file-pond />
+        <file-pond class="mt-8" />
       </client-only>
     </div>
 
@@ -37,6 +37,7 @@
           </Button>
         </li>
       </ul>
+      <p v-show="submissions.length === 0" class="mt-8">No submissions yet!</p>
       <Button class="mt-8" type="secondary" @click="downloadAll">
         DOWNLOAD ALL
       </Button>
@@ -69,6 +70,15 @@
     >
       Uh oh! We couldn't find the request. Refresh and try again.
     </toast>
+    <toast
+      ref="downloadErrorToast"
+      text-color="background"
+      background-color="error"
+      title="Query Failed"
+      icon="error"
+    >
+      Uh oh! We couldn't download the submission. Refresh and try again.
+    </toast>
   </main>
 </template>
 
@@ -76,7 +86,7 @@
 import { BSON } from 'mongodb-stitch-browser-sdk'
 import { AwsRequest } from 'mongodb-stitch-browser-services-aws'
 import vueFilePond, { setOptions } from 'vue-filepond'
-import { putObject } from '@/util/s3'
+import { putObject, downloadBlob } from '@/util/s3'
 import Toast from '@/components/base/toast'
 import Button from '@/components/base/button'
 import 'filepond/dist/filepond.min.css'
@@ -152,6 +162,7 @@ export default {
         process: (fieldName, file, metadata, load, error, progress, abort) => {
           if (convertBytesToMegabytes(file.size) > MAX_FILE_SIZE) {
             error('File size too large')
+            return
           }
 
           const reader = new FileReader()
@@ -176,22 +187,18 @@ export default {
             this.$s3client
               .execute(request.build())
               .then((result) => {
-                this.$stitchApp
-                  .callFunction('createSubmission', [
-                    {
-                      token: this.token,
-                      email: this.$route.query.email,
-                      filename: file.name,
-                      url: result.ETag,
-                    },
-                  ])
-                  .then(() => {
-                    this.$router.push({ path: '/success' })
-                    load(putObjectArgs.Key)
-                  })
-                  .catch(() => {
-                    this.$refs.errorToast.open()
-                  })
+                return this.$stitchApp.callFunction('createSubmission', [
+                  {
+                    token: this.token,
+                    email: this.$route.query.email,
+                    filename: file.name,
+                    url: result.ETag,
+                  },
+                ])
+              })
+              .then(() => {
+                this.$router.push({ path: '/success' })
+                load(putObjectArgs.Key)
               })
               .catch(() => {
                 this.$refs.errorToast.open()
@@ -211,8 +218,37 @@ export default {
     })
   },
   methods: {
-    downloadSubmission(index) {},
-    downloadAll() {},
+    downloadSubmission(index) {
+      const filename = this.submissions[index].filename
+      const getObjectArgs = {
+        Bucket: 'workdrop-submissions',
+        Key: `${this.token}-${filename}`,
+      }
+
+      const link = document.createElement('a')
+      link.style.display = 'none'
+      document.body.appendChild(link)
+
+      const request = new AwsRequest.Builder()
+        .withService('s3')
+        .withAction('GetObject')
+        .withRegion('us-east-1')
+        .withArgs(getObjectArgs)
+
+      this.$s3client
+        .execute(request.build())
+        .then((result) => {
+          downloadBlob(result.Body.buffer, filename, 'application/octet-stream')
+        })
+        .catch(() => {
+          this.$refs.downloadErrorToast.open()
+        })
+    },
+    downloadAll() {
+      this.submissions.forEach((submission, index) => {
+        this.downloadSubmission(index)
+      })
+    },
   },
   middleware: ['token'],
 }

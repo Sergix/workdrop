@@ -1,5 +1,5 @@
 <template>
-  <main class="flex items-center">
+  <main class="flex items-center max-w-2xl">
     <fade-transition>
       <component
         :is="currentFormSection"

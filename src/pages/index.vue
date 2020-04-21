@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col mb-16 md:mb-32">
+  <main class="flex flex-col mb-16 max-w-6xl md:mb-32">
     <div class="flex flex-row">
       <div class="hidden md:block mx-8 mt-16 leading-tight max-w-xl pr-16">
         <p class="underlined font-bold text-4xl">
