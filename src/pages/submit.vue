@@ -1,18 +1,74 @@
 <template>
-  <main class="container p-16">
-    <client-only>
-      <file-pond />
-    </client-only>
-    <output>{{ uploadState }}</output>
-    <Button action="secondary" @click="$refs.successToast.open()"
-      >SUBMIT</Button
-    >
+  <main class="container px-8">
+    <div v-show="submitting">
+      <h1 class="text-3xl mb-2 leading-none">Submit your assignment</h1>
+      <section>
+        <h2 class="text-xl font-medium">Assignment Name</h2>
+        <p class="ml-4">{{ assignmentName }}</p>
+      </section>
+      <section>
+        <h2 class="text-xl font-medium">Message</h2>
+        <p class="ml-4">{{ message }}</p>
+      </section>
+      <client-only>
+        <file-pond />
+      </client-only>
+    </div>
+
+    <div v-show="accessing">
+      <h1 class="text-3xl mb-2 font-semibold leading-none">Submissions</h1>
+      <p class="text-sm italic">
+        {{ requestCount - submissions.length }} submissions remaining
+      </p>
+      <ul>
+        <li
+          v-for="(submission, index) in submissions"
+          :key="submission.email"
+          class="mt-6"
+        >
+          <h2 class="text-xl font-medium">{{ submission.email }}</h2>
+          <p class="text-sm italic">{{ submission.filename }}</p>
+          <Button
+            type="primary"
+            class="mt-2"
+            @click="downloadSubmission(index)"
+          >
+            DOWNLOAD
+          </Button>
+        </li>
+      </ul>
+      <Button class="mt-8" type="secondary" @click="downloadAll">
+        DOWNLOAD ALL
+      </Button>
+    </div>
+
     <toast
-      ref="successToast"
-      text-color="info-accessible"
-      background-color="success"
-      icon="success"
-    />
+      ref="errorToast"
+      text-color="background"
+      background-color="error"
+      title="Upload Failed"
+      icon="error"
+    >
+      Uh oh! Your file could not be uploaded.
+    </toast>
+    <toast
+      ref="accessErrorToast"
+      text-color="background"
+      background-color="error"
+      title="Query Failed"
+      icon="error"
+    >
+      Uh oh! We couldn't access your submissions. Refresh and try again.
+    </toast>
+    <toast
+      ref="submitAccessErrorToast"
+      text-color="background"
+      background-color="error"
+      title="Query Failed"
+      icon="error"
+    >
+      Uh oh! We couldn't find the request. Refresh and try again.
+    </toast>
   </main>
 </template>
 
@@ -26,15 +82,6 @@ import Button from '@/components/base/button'
 import 'filepond/dist/filepond.min.css'
 
 const FilePond = vueFilePond()
-
-const UPLOAD_STATES = {
-  initial: '',
-  fileTooLarge: 'File cannot be greater than 25MB.',
-  reading: 'Reading file...',
-  uploading: 'Uploading submission...',
-  uploaded: 'Submission uploaded!',
-  uploadError: 'Upload failed!',
-}
 
 const MAX_FILE_SIZE = 25 // megabytes
 
@@ -52,17 +99,59 @@ export default {
   data() {
     return {
       token: this.$route.query.token,
-      uploadState: UPLOAD_STATES.initial,
+      accessing: this.$route.query.accessor || false,
+      submitting: this.$route.query.email || false,
+      submissions: [],
+      assignmentName: '',
+      message: '',
+      requestCount: 0,
     }
   },
   mounted() {
+    const requestsCollection = this.$stitchDb.collection('requests')
+    const submissionsCollection = this.$stitchDb.collection('submissions')
+
+    // if we are accessing submissions, get all current submissions and
+    // the original request
+    if (this.$route.query.accessor) {
+      submissionsCollection
+        .find({
+          token: this.$route.query.token,
+        })
+        .toArray()
+        .then((result) => (this.submissions = result))
+        .catch(() => this.$refs.accessErrorToast.open())
+
+      requestsCollection
+        .findOne({
+          token: this.$route.query.token,
+        })
+        .then((result) => {
+          this.requestCount = result.request_emails.length
+        })
+        .catch(() => this.$refs.accessErrorToast.open())
+    }
+
+    // if we are submitting, get the request info
+    if (this.$route.query.email) {
+      requestsCollection
+        .findOne({
+          token: this.$route.query.token,
+        })
+        .then((result) => {
+          this.message = result.message
+          this.assignmentName = result.name
+        })
+        .catch(() => this.$refs.accessErrorToast.open())
+    }
+
     setOptions({
       server: {
         // haven't had time to refactor this code yet, and frankly don't want to, it
         // worringly seems very delicate
         process: (fieldName, file, metadata, load, error, progress, abort) => {
           if (convertBytesToMegabytes(file.size) > MAX_FILE_SIZE) {
-            error(UPLOAD_STATES.fileTooLarge)
+            error('File size too large')
           }
 
           const reader = new FileReader()
@@ -87,10 +176,25 @@ export default {
             this.$s3client
               .execute(request.build())
               .then((result) => {
-                load(putObjectArgs.Key)
+                this.$stitchApp
+                  .callFunction('createSubmission', [
+                    {
+                      token: this.token,
+                      email: this.$route.query.email,
+                      filename: file.name,
+                      url: result.ETag,
+                    },
+                  ])
+                  .then(() => {
+                    this.$router.push({ path: '/success' })
+                    load(putObjectArgs.Key)
+                  })
+                  .catch(() => {
+                    this.$refs.errorToast.open()
+                  })
               })
-              .catch((err) => {
-                console.error(err)
+              .catch(() => {
+                this.$refs.errorToast.open()
               })
           }
 
@@ -105,6 +209,10 @@ export default {
         },
       },
     })
+  },
+  methods: {
+    downloadSubmission(index) {},
+    downloadAll() {},
   },
   middleware: ['token'],
 }

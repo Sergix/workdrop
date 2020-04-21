@@ -21,7 +21,8 @@
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-browser-services-aws": "^4.8.0",
     "nuxt": "^2.0.0",
-    "vue-filepond": "^6.0.2"
+    "vue-filepond": "^6.0.2",
+    "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

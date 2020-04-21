@@ -2,7 +2,7 @@
   <button
     type="button"
     class="py-2 px-8 rounded-md text-md tracking-wide shadow-soft"
-    :class="{ [action]: action }"
+    :class="{ [type]: type }"
     @click="$emit('click')"
   >
     <slot />
@@ -13,7 +13,7 @@
 export default {
   name: 'Button',
   props: {
-    action: {
+    type: {
       default: 'primary',
       type: String,
     },
@@ -43,5 +43,27 @@ button.secondary {
   @apply border-action;
   @apply border-2;
   @apply font-semibold;
+}
+
+button.small {
+  @apply bg-background;
+  @apply text-action;
+  @apply border;
+  @apply border-action;
+  @apply border-2;
+  @apply font-semibold;
+  @apply py-1;
+  @apply px-4;
+}
+
+button.warning {
+  @apply bg-background;
+  @apply text-foreground;
+  @apply border;
+  @apply border-warning;
+  @apply border-2;
+  @apply font-semibold;
+  @apply py-1;
+  @apply px-4;
 }
 </style>

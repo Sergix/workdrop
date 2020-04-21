@@ -10,7 +10,7 @@
     <div class="mr-4">
       <h3 class="text-2xl">{{ title }}</h3>
       <p class="leading-4 text-sm">
-        Success! Your account has been created.
+        <slot />
       </p>
     </div>
     <img :src="iconSrc" class="mr-6" />

@@ -1,8 +1,45 @@
 <template>
-  <div class="container">
-    <nuxt-link to="/request">Request</nuxt-link>
-    <nuxt-link to="/submit">Submit</nuxt-link>
-  </div>
+  <main class="flex flex-col mb-16 md:mb-32">
+    <div class="flex flex-row">
+      <div class="hidden md:block mx-8 mt-16 leading-tight max-w-xl pr-16">
+        <p class="underlined font-bold text-4xl">
+          Workdrop is a service designed for educators to request files from
+          students for assignments.
+        </p>
+        <p class="text-lg mt-4 font-medium">
+          No account necessary. Completely free.
+        </p>
+      </div>
+      <img
+        src="@/assets/svg/illustration-online_education.svg"
+        alt="Studying"
+        class="w-64 mx-auto"
+      />
+    </div>
+    <nuxt-link to="/request" class="mx-auto mt-16">
+      <Button>
+        REQUEST AN ASSIGNMENT
+      </Button>
+    </nuxt-link>
+
+    <!-- duplicated from above for mobile view -->
+    <div class="md:hidden mx-8 mt-16 font-medium text-2xl leading-tight">
+      <p class="underlined">
+        Workdrop is a service designed for educators to request files from
+        students for assignments.
+      </p>
+      <p class="text-right mt-12">No account necessary. Completely free.</p>
+    </div>
+  </main>
 </template>
 
-<script></script>
+<script>
+import Button from '@/components/base/button'
+
+export default {
+  name: 'IndexPage',
+  components: {
+    Button,
+  },
+}
+</script>

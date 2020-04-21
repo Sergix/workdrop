@@ -1,8 +1,22 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="flex flex-col min-h-screen min-w-full">
+    <Navbar class="max-w-6xl mx-auto" />
+    <nuxt class="my-10 max-w-6xl mx-auto flex-1" />
+    <Footer />
   </div>
 </template>
+
+<script>
+import Navbar from '@/components/nav/navbar'
+import Footer from '@/components/footer'
+
+export default {
+  components: {
+    Navbar,
+    Footer,
+  },
+}
+</script>
 
 <style lang="sass">
 html
@@ -14,6 +28,10 @@ html
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
   box-sizing: border-box
+  overflow-x: hidden
+
+body
+  overflow-x: hidden
 
 *, *:before, *:after
   box-sizing: border-box
