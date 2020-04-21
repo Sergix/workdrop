@@ -5,13 +5,7 @@
     @continue="validateName"
   >
     <Input v-model="assignmentName" />
-    <toast
-      ref="errorNotification"
-      title="Empty Name"
-      background-color="error-accessible"
-      text-color="background"
-      icon="error"
-    >
+    <toast ref="errorNotification" title="Empty Name" icon="error">
       Please enter your assignment's name.
     </toast>
   </Form>

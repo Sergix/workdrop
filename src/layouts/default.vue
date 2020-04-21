@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen min-w-full">
     <Navbar class="max-w-6xl mx-auto" />
-    <nuxt class="my-10 md:mb-32 mx-auto flex-1" />
+    <nuxt class="my-10 lg:mb-32 mx-auto flex-1" />
     <Footer />
   </div>
 </template>
@@ -36,4 +36,8 @@ body
 *, *:before, *:after
   box-sizing: border-box
   margin: 0
+
+@media (min-width: 768px)
+  html
+    @apply text-large-screens
 </style>

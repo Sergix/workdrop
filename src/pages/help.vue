@@ -18,16 +18,15 @@
       <h3>How are assignments sent in?</h3>
       <p>
         When you create a new assignment request, you provide your students’
-        emails. An email is sent out to each student you entered, and this email
-        contains a link to this website on a page they can submit their
-        assignment.
+        emails. An email is sent out to each student, and this email contains a
+        link to a page where they can submit their assignment.
       </p>
     </section>
     <section>
       <h3>What types of assignments can my students send in?</h3>
       <p>
         Any file type is acceptable, from Microsoft Word documents, to videos,
-        to simple text files. Maximum file size is 250 megabytes.
+        to simple text files. Maximum file size is 25 megabytes.
       </p>
     </section>
     <section>

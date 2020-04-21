@@ -1,7 +1,7 @@
 <template>
-  <main class="flex flex-col mb-16 max-w-6xl md:mb-32">
-    <div class="flex flex-row">
-      <div class="hidden md:block mx-8 mt-16 leading-tight max-w-xl pr-16">
+  <main class="flex flex-col mb-16 max-w-6xl lg:mb-32">
+    <div class="flex flex-col md:flex-row">
+      <div class="hidden lg:block mx-8 mt-16 leading-tight max-w-xl pr-16">
         <p class="underlined font-bold text-4xl">
           Workdrop is a service designed for educators to request files from
           students for assignments.
@@ -13,7 +13,7 @@
       <img
         src="@/assets/svg/illustration-online_education.svg"
         alt="Studying"
-        class="w-64 mx-auto"
+        class="w-64 mx-auto lg:mt-12"
       />
     </div>
     <nuxt-link to="/request" class="mx-auto mt-16">
@@ -23,7 +23,7 @@
     </nuxt-link>
 
     <!-- duplicated from above for mobile view -->
-    <div class="md:hidden mx-8 mt-16 font-medium text-2xl leading-tight">
+    <div class="lg:hidden mx-8 mt-16 font-medium text-2xl leading-tight">
       <p class="underlined">
         Workdrop is a service designed for educators to request files from
         students for assignments.

@@ -80,11 +80,11 @@ $inputBackground: #fafafa;
   input {
     outline: none;
     width: 100%;
-    font-size: 16px;
     border: $inputBorder;
     border-radius: $inputBorderRadius;
     line-height: 24px;
-    padding: 8px 8px 8px 14px;
+    @apply py-3;
+    @apply px-4;
     box-shadow: $inputShadow;
     color: $textColor;
     background: $inputBackground;

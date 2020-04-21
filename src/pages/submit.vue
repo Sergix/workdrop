@@ -43,40 +43,16 @@
       </Button>
     </div>
 
-    <toast
-      ref="errorToast"
-      text-color="background"
-      background-color="error"
-      title="Upload Failed"
-      icon="error"
-    >
+    <toast ref="errorToast" title="Upload Failed" icon="error">
       Uh oh! Your file could not be uploaded.
     </toast>
-    <toast
-      ref="accessErrorToast"
-      text-color="background"
-      background-color="error"
-      title="Query Failed"
-      icon="error"
-    >
+    <toast ref="accessErrorToast" title="Query Failed" icon="error">
       Uh oh! We couldn't access your submissions. Refresh and try again.
     </toast>
-    <toast
-      ref="submitAccessErrorToast"
-      text-color="background"
-      background-color="error"
-      title="Query Failed"
-      icon="error"
-    >
+    <toast ref="submitAccessErrorToast" title="Query Failed" icon="error">
       Uh oh! We couldn't find the request. Refresh and try again.
     </toast>
-    <toast
-      ref="downloadErrorToast"
-      text-color="background"
-      background-color="error"
-      title="Query Failed"
-      icon="error"
-    >
+    <toast ref="downloadErrorToast" title="Query Failed" icon="error">
       Uh oh! We couldn't download the submission. Refresh and try again.
     </toast>
   </main>
@@ -89,7 +65,6 @@ import vueFilePond, { setOptions } from 'vue-filepond'
 import { putObject, downloadBlob } from '@/util/s3'
 import Toast from '@/components/base/toast'
 import Button from '@/components/base/button'
-import 'filepond/dist/filepond.min.css'
 
 const FilePond = vueFilePond()
 
