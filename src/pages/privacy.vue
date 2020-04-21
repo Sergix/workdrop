@@ -319,6 +319,11 @@
 <script>
 export default {
   name: 'PrivacyPage',
+  head() {
+    return {
+      title: 'Privacy / workdrop',
+    }
+  },
 }
 </script>
 

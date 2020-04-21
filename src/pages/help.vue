@@ -69,6 +69,17 @@
   </main>
 </template>
 
+<script>
+export default {
+  name: 'HelpPage',
+  head() {
+    return {
+      title: 'Help / workdrop',
+    }
+  },
+}
+</script>
+
 <style lang="sass" scoped>
 p
   @apply mt-2

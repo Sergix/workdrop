@@ -659,6 +659,11 @@
 <script>
 export default {
   name: 'TermsPage',
+  head() {
+    return {
+      title: 'Terms of Use / workdrop',
+    }
+  },
 }
 </script>
 

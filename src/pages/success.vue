@@ -15,5 +15,10 @@
 <script>
 export default {
   name: 'SuccessPage',
+  head() {
+    return {
+      title: 'Success / workdrop',
+    }
+  },
 }
 </script>

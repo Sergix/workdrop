@@ -10,13 +10,31 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'application-name', content: 'workdrop' },
+      { name: 'theme-color', content: '#FAFAFA' },
       {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+
+      { name: 'twitter:card', content: 'workdrop' },
+      { name: 'twitter:url', content: 'https://www.workdrop.app/' },
+      { name: 'twitter:title', content: 'workdrop' },
+      {
+        name: 'twitter:description',
+        content: 'An assignment requesting app for teachers and educators.',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'me', type: 'text/html', href: 'https://www.sergix.net/' },
+      { rel: 'me', href: 'mailto:sergix@sergix.net' },
+      { rel: 'dns-prefetch', href: '//workdrop.app/' },
+      { rel: 'preconnect', href: 'https://www.workdrop.app/' },
+      { rel: 'prefetch', href: 'https://www.workdrop.app/' },
+      { rel: 'prerender', href: 'https://workdrop.app/' },
+    ],
   },
   /*
    ** Customize the progress-bar color

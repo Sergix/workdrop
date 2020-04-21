@@ -13,4 +13,5 @@
 - created request form and request uploader
 - created submission download form and downloader
 - created help, about, privacy policy, and terms pages
+- added icons and meta information
 - pushed for release!

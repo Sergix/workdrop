@@ -251,5 +251,10 @@ export default {
     },
   },
   middleware: ['token'],
+  head() {
+    return {
+      title: 'Submit / workdrop',
+    }
+  },
 }
 </script>

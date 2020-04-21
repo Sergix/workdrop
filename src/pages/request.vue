@@ -91,5 +91,10 @@ export default {
         .catch(() => this.$refs.errorToast.open())
     },
   },
+  head() {
+    return {
+      title: 'Request / workdrop',
+    }
+  },
 }
 </script>

@@ -68,6 +68,11 @@ export default {
   components: {
     Button,
   },
+  head() {
+    return {
+      title: 'About / workdrop',
+    }
+  },
 }
 </script>
 
