@@ -1,5 +1,11 @@
 # Workdrop Changelog
 
+## v0.1.2
+
+- add [OpenGraph](https://ogp.me/) meta tags
+- add new cover image for OpenGraph
+- add sitemap.xml
+
 ## v0.1.1
 
 - fix font sizing for large screens

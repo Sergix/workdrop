@@ -25,6 +25,11 @@ export default {
         name: 'twitter:description',
         content: 'An assignment requesting app for teachers and educators.',
       },
+
+      { property: 'og:title', content: 'workdrop' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://www.workdrop.app/' },
+      { property: 'og:image', content: 'https://www.workdrop.app/ogimage.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
