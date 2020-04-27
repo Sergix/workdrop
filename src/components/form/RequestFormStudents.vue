@@ -16,6 +16,7 @@
         <img
           v-show="students.length > 1"
           src="@/assets/svg/minus-circle.svg"
+          alt="Delete Student"
           class="mr-2 cursor-pointer"
           @click="removeStudent(index)"
         />
