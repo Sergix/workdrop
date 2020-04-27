@@ -39,7 +39,10 @@ export default function(context) {
         return context.redirect('/')
       }
     })
-    .catch(() => context.redirect('/'))
+    .catch((error) => {
+      context.$sentry.captureException(error)
+      context.redirect('/')
+    })
 
   // case 5
   const submissionsCollection = context.app.$stitchDb.collection('submissions')
@@ -56,6 +59,9 @@ export default function(context) {
           return context.redirect('/success')
         }
       })
-      .catch(() => context.redirect('/'))
+      .catch((error) => {
+        context.$sentry.captureException(error)
+        context.redirect('/')
+      })
   }
 }

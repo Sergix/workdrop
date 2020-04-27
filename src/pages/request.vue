@@ -19,6 +19,7 @@
 import RequestFormAssignmentName from '@/components/form/RequestFormAssignmentName'
 import RequestFormStudents from '@/components/form/RequestFormStudents'
 import RequestFormMessage from '@/components/form/RequestFormMessage'
+import RequestFormEmail from '@/components/form/RequestFormEmail'
 import RequestFormReview from '@/components/form/RequestFormReview'
 import Toast from '@/components/base/toast'
 
@@ -26,6 +27,7 @@ const FORM_STEPS = [
   'RequestFormAssignmentName',
   'RequestFormStudents',
   'RequestFormMessage',
+  'RequestFormEmail',
   'RequestFormReview',
 ]
 
@@ -35,6 +37,7 @@ export default {
     RequestFormAssignmentName,
     RequestFormStudents,
     RequestFormMessage,
+    RequestFormEmail,
     RequestFormReview,
     Toast,
   },
@@ -83,7 +86,10 @@ export default {
             path: `/submit?token=${response.newRequest.token}&accessor=${response.newRequest.accessor}`,
           })
         })
-        .catch(() => this.$refs.errorToast.open())
+        .catch((error) => {
+          this.$sentry.captureException(error)
+          this.$refs.errorToast.open()
+        })
     },
   },
   head() {

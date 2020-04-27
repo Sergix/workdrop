@@ -15,8 +15,8 @@ export const mutations = {
   setStudentValid(state, { index, valid }) {
     state.students[index].valid = valid
   },
-  removeStudent(state, email) {
-    state.students.splice(state.students.indexOf(email), 1)
+  removeStudent(state, { index }) {
+    state.students.splice(index, 1)
   },
   setAssignmentName(state, assignmentName) {
     state.assignmentName = assignmentName

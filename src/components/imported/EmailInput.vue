@@ -3,6 +3,7 @@
     <input
       v-model="input"
       type="email"
+      maxlength="50"
       :placeholder="placeholder"
       @input="handleInput($event.target.value)"
     />

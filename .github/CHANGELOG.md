@@ -1,5 +1,24 @@
 # Workdrop Changelog
 
+## v0.1.3
+
+- add @nuxtjs/sitemap to supersede manual sitemap editing
+- remove sitemap.xml
+- add @nuxtjs/sentry for error logging
+  - add sentry captures in async `catch`es
+- fix `md` screen padding for navbar and index page
+- adjust request button font sizing
+- adjust transition timing
+- add delete button for students
+- add student limit of 20
+- adjust small button styling
+- change mobile navmenu to close even if route doesn't change
+- insert fifth request form specifically for sender email
+  - remove email field from `RequestFormReview`
+- add TODO
+- add max input limit for assignment name and message
+- add max email length
+
 ## v0.1.2
 
 - add [OpenGraph](https://ogp.me/) meta tags

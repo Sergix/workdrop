@@ -50,13 +50,14 @@
   margin-right: -100px;
 }
 
-@media (min-width: 768px) {
-  .page-enter-active,
-  .page-leave-active {
-    transition: opacity 0.3s;
-  }
-  .page-enter,
-  .page-leave-to {
-    opacity: 0;
-  }
+.page-enter-active {
+  transition: opacity 0.4s;
+}
+.page-leave-active {
+  transition: opacity 0s;
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }
