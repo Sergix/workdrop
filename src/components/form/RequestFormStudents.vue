@@ -7,20 +7,37 @@
     @back="$emit('back')"
   >
     <h2 class="text-xl font-medium">Student Emails</h2>
-    <EmailInput
-      v-for="(student, index) in students"
-      :key="index"
-      :value="student.email"
-      placeholder="student email"
-      class="mt-2 w-full"
-      @input="editStudent(index, $event)"
-      @validate="setStudentValid(index, $event)"
-    />
-    <Button type="small" class="ml-auto mt-2 mb-4" @click="addStudent">
+    <ul class="mt-2">
+      <li
+        v-for="(student, index) in students"
+        :key="index"
+        class="flex flex-row mt-2"
+      >
+        <img
+          v-show="students.length > 1"
+          src="@/assets/svg/minus-circle.svg"
+          alt="Delete Student"
+          class="mr-2 cursor-pointer"
+          @click="removeStudent(index)"
+        />
+        <EmailInput
+          :value="student.email"
+          placeholder="student email"
+          class="w-full my-auto"
+          @input="editStudent(index, $event)"
+          @validate="setStudentValid(index, $event)"
+        />
+      </li>
+    </ul>
+    <Button type="small" class="ml-auto mt-4 mb-4" @click="addStudent">
       ADD ANOTHER
     </Button>
     <toast ref="errorNotification" title="Invalid Email" icon="error">
       Please double-check that all emails are correct.
+    </toast>
+    <toast ref="limitNotification" title="Student Limit" icon="error">
+      Sorry, but workdrop currently only supports adding up to 20 students per
+      assignment.
     </toast>
   </Form>
 </template>
@@ -49,10 +66,18 @@ export default {
   },
   methods: {
     addStudent() {
+      if (this.students.length >= 20) {
+        this.$refs.limitNotification.open()
+        return
+      }
+
       this.$store.commit('request/addStudent', '')
     },
     editStudent(index, newEmail) {
       this.$store.commit('request/editStudent', { index, newEmail })
+    },
+    removeStudent(index) {
+      this.$store.commit('request/removeStudent', { index })
     },
     setStudentValid(index, valid) {
       this.$store.commit('request/setStudentValid', { index, valid })

@@ -52,8 +52,9 @@ button.small {
   @apply border-action;
   @apply border-2;
   @apply font-semibold;
-  @apply py-1;
   @apply px-4;
+  padding-top: 0.25em;
+  padding-bottom: 0.2em;
 }
 
 button.warning {

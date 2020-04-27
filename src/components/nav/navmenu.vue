@@ -2,7 +2,10 @@
   <nav
     class="absolute right-0 top-0 w-screen h-screen bg-background text-right px-4 py-4"
   >
-    <div class="flex flex-col leading-9 mt-16 mr-2 navlinks">
+    <div
+      class="flex flex-col leading-9 mt-16 mr-2 navlinks"
+      @click="$emit('close')"
+    >
       <nuxt-link to="/">HOME</nuxt-link>
       <nuxt-link to="/request">REQUEST</nuxt-link>
       <nuxt-link to="/about">ABOUT</nuxt-link>

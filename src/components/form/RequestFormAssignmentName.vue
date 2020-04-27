@@ -4,7 +4,7 @@
     description="Enter the name of the assignment."
     @continue="validateName"
   >
-    <Input v-model="assignmentName" />
+    <Input v-model="assignmentName" maxlength="100" />
     <toast ref="errorNotification" title="Empty Name" icon="error">
       Please enter your assignment's name.
     </toast>

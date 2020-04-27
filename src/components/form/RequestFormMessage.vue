@@ -7,7 +7,7 @@ along with your assignment request."
     @continue="$emit('continue')"
     @back="$emit('back')"
   >
-    <Input v-model="message" />
+    <Input v-model="message" maxlength="250" />
   </Form>
 </template>
 

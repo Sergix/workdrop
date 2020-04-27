@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="w-full flex flex-row py-2 px-6 mt-4 lg:py-8 lg:px-0 items-center z-10"
-  >
+  <nav class="w-full flex flex-row py-2 px-6 mt-4 lg:py-8 items-center z-10">
     <div class="flex flex-row flex-grow lg:flex-grow-0">
       <nuxt-link to="/"
         ><img
@@ -19,8 +17,8 @@
     <Button type="small" class="lg:hidden z-10" @click="toggleMobileMenu">
       {{ mobileMenuActive ? 'CLOSE' : '' }} MENU
     </Button>
-    <slide-x-right-transition>
-      <NavMenu v-show="mobileMenuActive" />
+    <slide-x-right-transition :duration="500" :delay="50">
+      <NavMenu v-show="mobileMenuActive" @close="closeMenu" />
     </slide-x-right-transition>
   </nav>
 </template>
@@ -72,5 +70,4 @@ export default {
 .navlist > a
   @apply mx-8
   @apply text-action
-// more styling for this componet in donotpurge.css
 </style>

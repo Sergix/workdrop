@@ -1,7 +1,9 @@
 <template>
   <main class="container px-8 max-w-2xl">
     <div v-show="submitting">
-      <h1 class="text-3xl leading-none">Submit your assignment</h1>
+      <h1 class="text-3xl leading-none font-semibold">
+        Submit your assignment
+      </h1>
       <section class="mt-4">
         <h2 class="text-xl font-medium">Assignment Name</h2>
         <p class="ml-4">{{ assignmentName }}</p>
@@ -105,7 +107,10 @@ export default {
         })
         .toArray()
         .then((result) => (this.submissions = result))
-        .catch(() => this.$refs.accessErrorToast.open())
+        .catch((error) => {
+          this.$sentry.captureException(error)
+          this.$refs.accessErrorToast.open()
+        })
 
       requestsCollection
         .findOne({
@@ -114,7 +119,10 @@ export default {
         .then((result) => {
           this.requestCount = result.request_emails.length
         })
-        .catch(() => this.$refs.accessErrorToast.open())
+        .catch((error) => {
+          this.$sentry.captureException(error)
+          this.$refs.accessErrorToast.open()
+        })
     }
 
     // if we are submitting, get the request info
@@ -127,7 +135,10 @@ export default {
           this.message = result.message
           this.assignmentName = result.name
         })
-        .catch(() => this.$refs.accessErrorToast.open())
+        .catch((error) => {
+          this.$sentry.captureException(error)
+          this.$refs.accessErrorToast.open()
+        })
     }
 
     setOptions({
@@ -175,7 +186,8 @@ export default {
                 this.$router.push({ path: '/success' })
                 load(putObjectArgs.Key)
               })
-              .catch(() => {
+              .catch((error) => {
+                this.$sentry.captureException(error)
                 this.$refs.errorToast.open()
               })
           }
@@ -215,7 +227,8 @@ export default {
         .then((result) => {
           downloadBlob(result.Body.buffer, filename, 'application/octet-stream')
         })
-        .catch(() => {
+        .catch((error) => {
+          this.$sentry.captureException(error)
           this.$refs.downloadErrorToast.open()
         })
     },

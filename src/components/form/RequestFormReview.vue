@@ -27,44 +27,26 @@ to request your assignment!"
       </p>
     </section>
     <section class="mt-4">
-      <h2 class="text-xl font-medium">Your email</h2>
-      <p class="text-sm italic mb-4">
-        Your email will be used to send you a unique link to access your
-        students’ submissions. We will never share it with anyone.
+      <h2 class="text-xl font-medium">Your Email</h2>
+      <p class="ml-4 mt-2">
+        {{ email }}
       </p>
-      <EmailInput
-        v-model="email"
-        class="max-w-sm"
-        @validate="validated = $event"
-      />
     </section>
-    <Button type="primary" class="mt-8 md:ml-auto" @click="validateEmail">
+    <Button type="primary" class="mt-8 md:ml-auto" @click="$emit('continue')">
       SEND ASSIGNMENT
     </Button>
-    <toast ref="errorNotification" title="Invalid Email" icon="error">
-      Please double-check that your email is correct.
-    </toast>
   </Form>
 </template>
 
 <script>
 import Form from '@/components/base/form'
 import Button from '@/components/base/button'
-import Toast from '@/components/base/toast'
-import EmailInput from '@/components/imported/EmailInput'
 
 export default {
   name: 'RequestFormAssignmentName',
   components: {
     Form,
     Button,
-    Toast,
-    EmailInput,
-  },
-  data() {
-    return {
-      validated: false,
-    }
   },
   computed: {
     assignmentName() {
@@ -76,22 +58,8 @@ export default {
     message() {
       return this.$store.state.request.message
     },
-    email: {
-      get() {
-        return this.$store.state.request.email
-      },
-      set(value) {
-        this.$store.commit('request/setEmail', value)
-      },
-    },
-  },
-  methods: {
-    validateEmail() {
-      if (!this.validated) {
-        this.$refs.errorNotification.open()
-      } else {
-        this.$emit('continue')
-      }
+    email() {
+      return this.$store.state.request.email
     },
   },
 }

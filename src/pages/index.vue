@@ -1,7 +1,7 @@
 <template>
   <main class="flex flex-col mb-16 max-w-6xl lg:mb-32">
-    <div class="flex flex-col md:flex-row">
-      <div class="hidden lg:block mx-8 mt-16 leading-tight max-w-xl pr-16">
+    <div class="flex flex-col mx-8 md:flex-row">
+      <div class="hidden lg:block mt-16 leading-tight max-w-xl pr-16">
         <p class="underlined font-bold text-4xl">
           Workdrop is a service designed for educators to request files from
           students for assignments.
@@ -17,7 +17,7 @@
       />
     </div>
     <nuxt-link to="/request" class="mx-auto mt-16">
-      <Button>
+      <Button class="text-lg request-button">
         REQUEST AN ASSIGNMENT
       </Button>
     </nuxt-link>
@@ -48,3 +48,9 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped>
+.request-button:after
+  border: 1px solid black
+  @apply m-4
+</style>

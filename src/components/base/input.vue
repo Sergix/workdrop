@@ -1,6 +1,7 @@
 <template>
   <input
     :value="value"
+    :maxlength="maxlength"
     type="text"
     class="bg-background text-foreground rounded rounded-md border border-foreground px-4 py-2"
     @input="$emit('input', $event.target.value)"
@@ -14,6 +15,11 @@ export default {
     value: {
       type: String,
       default: '',
+    },
+    maxlength: {
+      type: String,
+      default: '',
+      required: false,
     },
   },
 }
