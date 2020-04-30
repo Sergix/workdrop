@@ -1,0 +1,46 @@
+{
+  "database": "workdrop",
+  "collection": "requests",
+  "roles": [
+    {
+      "name": "owner",
+      "apply_when": {},
+      "write": true,
+      "insert": true,
+      "delete": false,
+      "additional_fields": {}
+    }
+  ],
+  "schema": {
+    "title": "request",
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "accessor": {
+        "bsonType": "string"
+      },
+      "email": {
+        "bsonType": "string"
+      },
+      "message": {
+        "bsonType": "string"
+      },
+      "name": {
+        "bsonType": "string"
+      },
+      "request_emails": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        }
+      },
+      "token": {
+        "bsonType": "string"
+      },
+      "timestamp": {
+        "bsonType": "date"
+      }
+    }
+  }
+}

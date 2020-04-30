@@ -67,7 +67,7 @@ export default {
 
 <style scoped lang="scss">
 $border: #121212;
-$success: #4fed77;
+$success: #33bb55;
 $textColor: #121212;
 $placeholderColor: #c7c8cc;
 $inputBorder: 1px solid #121212;

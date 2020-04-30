@@ -1,0 +1,5 @@
+{
+  "name": "s3-bucket",
+  "value": "workdrop-submissions",
+  "from_secret": false
+}

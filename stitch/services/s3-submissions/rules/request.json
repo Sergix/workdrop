@@ -1,0 +1,7 @@
+{
+  "name": "request",
+  "actions": ["s3:GetObject"],
+  "when": {
+    "%%args.Bucket": "workdrop-submissions"
+  }
+}

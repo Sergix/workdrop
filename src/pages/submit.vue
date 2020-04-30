@@ -45,6 +45,7 @@
       </Button>
     </div>
 
+    <!-- all notifications -->
     <toast ref="errorToast" title="Upload Failed" icon="error">
       Uh oh! Your file could not be uploaded.
     </toast>
@@ -72,9 +73,7 @@ const FilePond = vueFilePond()
 
 const MAX_FILE_SIZE = 25 // megabytes
 
-const convertBytesToMegabytes = (bytes) => {
-  return bytes / 1024 / 1024
-}
+const convertBytesToMegabytes = (bytes) => bytes / 1024 / 1024
 
 export default {
   name: 'SubmitPage',
@@ -100,7 +99,10 @@ export default {
 
     // if we are accessing submissions, get all current submissions and
     // the original request
-    if (this.$route.query.accessor) {
+    //
+    // accessing state is determined by whether the accessor token exists in the
+    // URL, which has already been validated by the token middleware
+    if (this.accessing) {
       submissionsCollection
         .find({
           token: this.$route.query.token,
@@ -114,7 +116,7 @@ export default {
 
       requestsCollection
         .findOne({
-          token: this.$route.query.token,
+          token: this.token,
         })
         .then((result) => {
           this.requestCount = result.request_emails.length
@@ -125,8 +127,11 @@ export default {
         })
     }
 
-    // if we are submitting, get the request info
-    if (this.$route.query.email) {
+    // if we are submitting, get the assignment information
+    //
+    // submitting state is determined by whether the URL has a valid token and email,
+    // determined by the token middleware
+    if (this.submitting) {
       requestsCollection
         .findOne({
           token: this.$route.query.token,
@@ -157,6 +162,10 @@ export default {
             const fileData = new Uint8Array(reader.result)
             const fileBson = new BSON.Binary(fileData)
 
+            // Key = filename
+            //
+            // file name example:
+            // f0bcdfdc-e53e-4592-a4a1-0e885a318540-example.jpeg
             const putObjectArgs = {
               Body: fileBson,
               Key: `${this.token}-${file.name}`,
@@ -194,7 +203,7 @@ export default {
 
           reader.readAsArrayBuffer(file)
 
-          // cancel methods for FilePond
+          // cancel method for FilePond
           return {
             abort: () => {
               abort()
@@ -212,6 +221,7 @@ export default {
         Key: `${this.token}-${filename}`,
       }
 
+      // create a fake link to click and trigger the browser download of the file
       const link = document.createElement('a')
       link.style.display = 'none'
       document.body.appendChild(link)
@@ -222,6 +232,7 @@ export default {
         .withRegion('us-east-1')
         .withArgs(getObjectArgs)
 
+      // application/octet-stream is for any generic binary stream
       this.$s3client
         .execute(request.build())
         .then((result) => {

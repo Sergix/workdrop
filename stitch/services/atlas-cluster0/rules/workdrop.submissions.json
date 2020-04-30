@@ -1,0 +1,37 @@
+{
+  "database": "workdrop",
+  "collection": "submissions",
+  "roles": [
+    {
+      "name": "default",
+      "apply_when": {},
+      "write": true,
+      "insert": true,
+      "delete": false,
+      "additional_fields": {}
+    }
+  ],
+  "schema": {
+    "title": "submission",
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "email": {
+        "bsonType": "string"
+      },
+      "filename": {
+        "bsonType": "string"
+      },
+      "timestamp": {
+        "bsonType": "date"
+      },
+      "token": {
+        "bsonType": "string"
+      },
+      "url": {
+        "bsonType": "string"
+      }
+    }
+  }
+}

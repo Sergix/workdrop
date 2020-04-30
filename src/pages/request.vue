@@ -12,6 +12,9 @@
     <toast ref="errorToast" title="Uh oh!" icon="error">
       We couldn't create the assignment. Refresh and try again.
     </toast>
+    <toast ref="creatingToast" title="Creating Assignment" icon="info">
+      We're sending over your assignment. Sit tight!
+    </toast>
   </main>
 </template>
 
@@ -69,6 +72,8 @@ export default {
       }
     },
     submitRequest() {
+      this.$refs.creatingToast.open()
+
       this.$stitchApp
         .callFunction('createRequest', [
           {

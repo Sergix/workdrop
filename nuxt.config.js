@@ -15,6 +15,10 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+      {
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'black-translucent',
+      },
 
       { name: 'twitter:card', content: 'workdrop' },
       { name: 'twitter:url', content: 'https://www.workdrop.app/' },

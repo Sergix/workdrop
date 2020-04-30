@@ -110,7 +110,7 @@
         Protocol address (e.g. IP address), browser type, browser version, the
         pages of our Service that You visit, the time and date of Your visit,
         the time spent on those pages, unique device identifiers and other
-        diagnostic data.
+        diagnostic data. This data is not stored.
       </p>
       <p>
         When You access the Service by or through a mobile device, We may
@@ -118,7 +118,7 @@
         to, the type of mobile device You use, Your mobile device unique ID, the
         IP address of Your mobile device, Your mobile operating system, the type
         of mobile Internet browser You use, unique device identifiers and other
-        diagnostic data.
+        diagnostic data. This data is not stored.
       </p>
       <p>
         We may also collect information that Your browser sends whenever You
@@ -147,14 +147,6 @@
           the Service.
         </li>
         <li>
-          To contact You: To contact You by email, telephone calls, SMS, or
-          other equivalent forms of electronic communication, such as a mobile
-          application's push notifications regarding updates or informative
-          communications related to the functionalities, products or contracted
-          services, including the security updates, when necessary or reasonable
-          for their implementation.
-        </li>
-        <li>
           To manage Your requests: To attend and manage Your requests to Us.
         </li>
       </ul>
@@ -170,13 +162,6 @@
           information in connection with, or during negotiations of, any merger,
           sale of Company assets, financing, or acquisition of all or a portion
           of our business to another company.
-        </li>
-        <li>
-          With Affiliates: We may share Your information with Our affiliates, in
-          which case we will require those affiliates to honor this Privacy
-          Policy. Affiliates include Our parent company and any other
-          subsidiaries, joint venture partners or other companies that We
-          control or that are under common control with Us.
         </li>
       </ul>
       <h3>Retention of Your Personal Data</h3>

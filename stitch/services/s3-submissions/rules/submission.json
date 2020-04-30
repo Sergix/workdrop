@@ -1,0 +1,7 @@
+{
+  "name": "submission",
+  "actions": ["s3:PutObject"],
+  "when": {
+    "%%args.Bucket": "workdrop-submissions"
+  }
+}
