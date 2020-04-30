@@ -1,0 +1,11 @@
+{
+  "name": "s3-submissions",
+  "type": "aws",
+  "config": {
+    "accessKeyId": "[REDACTED]"
+  },
+  "secret_config": {
+    "secretAccessKey": "S3_ACCESS_KEY"
+  },
+  "version": 1
+}

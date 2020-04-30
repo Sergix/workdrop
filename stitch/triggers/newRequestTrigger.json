@@ -1,0 +1,15 @@
+{
+  "name": "newRequestTrigger",
+  "type": "DATABASE",
+  "config": {
+    "operation_types": ["INSERT"],
+    "database": "workdrop",
+    "collection": "requests",
+    "service_name": "atlas-cluster0",
+    "match": {},
+    "full_document": false,
+    "unordered": true
+  },
+  "function_name": "sendRequestEmails",
+  "disabled": false
+}

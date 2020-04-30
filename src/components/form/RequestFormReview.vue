@@ -2,8 +2,7 @@
   <Form
     title="Review your assignment..."
     description="Double-check and make sure all the information
-you entered is accurate, then press “Send Request”
-to request your assignment!"
+you entered is accurate, then click or press “Send Assignment“!"
     :continue-button="false"
     back-button
     @back="$emit('back')"

@@ -1,5 +1,14 @@
 # Workdrop Changelog
 
+## v0.1.4
+
+- configure Apple PWA title bar color to transparent
+- add Stitch JSON assets for project submission
+- edit grammar on review form
+- edit Terms of Use
+- edit Privacy Policy
+- add uploading notification on request form submission
+
 ## v0.1.3
 
 - add @nuxtjs/sitemap to supersede manual sitemap editing
