@@ -3,6 +3,7 @@
 ## Unreleased
 
 - add setup instructions for MongoDB
+- add toast notification for request submission
 
 ## v0.1.4
 

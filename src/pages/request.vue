@@ -12,7 +12,7 @@
     <toast ref="errorToast" title="Uh oh!" icon="error">
       We couldn't create the assignment. Refresh and try again.
     </toast>
-    <toast ref="creatingToast" title="Creating Assignment" icon="info">
+    <toast ref="creatingToast" title="Uploading" type="info" icon="info">
       We're sending over your assignment. Sit tight!
     </toast>
   </main>
