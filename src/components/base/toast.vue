@@ -77,6 +77,10 @@ $fadeout-height: 2rem
     @apply bg-error-accessible
     @apply text-background
 
+  &.info
+    @apply bg-info-accessible
+    @apply text-background
+
 @-webkit-keyframes fadein
   from
     bottom: 0
