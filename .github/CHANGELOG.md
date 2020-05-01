@@ -1,5 +1,9 @@
 # Workdrop Changelog
 
+## Unreleased
+
+- add setup instructions for MongoDB
+
 ## v0.1.4
 
 - configure Apple PWA title bar color to transparent
