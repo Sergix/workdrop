@@ -23,13 +23,13 @@
     "filepond": "^4.13.4",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-browser-services-aws": "^4.8.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.12.2",
     "vue-filepond": "^6.0.2",
     "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
-    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/eslint-module": "^1.2.0",
     "@nuxtjs/tailwindcss": "^1.0.0",
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-eslint": "^10.0.1",
@@ -42,7 +42,7 @@
     "lite-server": "^2.5.4",
     "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^13.2.0",
     "vue-jest": "^4.0.0-0"
   }
 }
